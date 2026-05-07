@@ -1,7 +1,20 @@
-// src/pages/Login.jsx
 import "./Login.css";
+import { useState } from "react";
+import { loginUser } from "../../services/authService";
 
 export default function Login() {
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const handleLogin = async () => {
+        const response = await loginUser(email, senha);
+        if (response.success) {
+            alert(response.message);
+        } else {
+            alert("Login failed");
+        }
+    };
+
   return (
    <div className="login-wrapper">
         <div className="login-card">
@@ -14,6 +27,8 @@ export default function Login() {
                 type="email"
                 placeholder="seu@email.com"
                 className="login-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
             />
             </div>
 
@@ -23,10 +38,12 @@ export default function Login() {
                 type="password"
                 placeholder="••••••••"
                 className="login-input"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
             />
             </div>
 
-            <button className="login-button">Acessar</button>
+            <button className="login-button" onClick={handleLogin}>Acessar</button>
         </div>
     </div>
   );
