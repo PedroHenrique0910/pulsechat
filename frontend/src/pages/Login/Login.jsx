@@ -1,19 +1,20 @@
 import "./Login.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { loginUser } from "../../services/authService";
 
 export default function Login() {
+    const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
     const handleLogin = async () => {
-        const response = await loginUser(email, senha);
+        const response = await loginUser(email, senha)
         if (response.success) {
-            alert(response.message);
-        } else {
-            alert("Login failed");
+            localStorage.setItem("token", response.token) 
+            navigate("/home") 
         }
-    };
+    }
 
   return (
    <div className="login-wrapper">

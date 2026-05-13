@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import PrivateRoute from './src/Components/PrivateRoute.jsx'
+import PrivateRoute from './src/components/PrivateRoute.jsx'
 import Home from './src/pages/Home/Home.jsx'
 import Chat from './src/pages/Chat/Chat.jsx'
 import Login from './src/pages/Login/Login.jsx'
