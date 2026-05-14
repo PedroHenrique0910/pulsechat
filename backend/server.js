@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+import { User } from "./src/models/User.js";
+
 dotenv.config();
 const app = express();
 
@@ -17,6 +19,16 @@ mongoose.connect(process.env.MONGO_URI)
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
+
+app.post("/api/register", async (req, res) => {
+    const { nome, email, senha } = req.body
+
+    const user = new User({ nome, email, senha })
+    await user.save()
+
+    return res.json({ success: true, message: "Usuário criado!" })
+})
+
 
 app.post("/api/login", (req, res) => {
     const { email, senha } = req.body
